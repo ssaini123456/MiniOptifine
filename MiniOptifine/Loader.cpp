@@ -4,7 +4,7 @@ bool g_isToggled = false;
 
 void init() {
     GameUtil* l;
-    DWORD process_id = l->getGameProcessId(L"Minecraft.Windows.exe");
+    uint32_t process_id = l->getGameProcessId(L"Minecraft.Windows.exe");
     uintptr_t gameId = l->getGameModule(process_id);
     HANDLE process_handle = OpenProcess(PROCESS_ALL_ACCESS, NULL, process_id);
     std::cout << "Checking if game window is present..." << std::endl;
@@ -30,7 +30,7 @@ void init() {
         if (GetAsyncKeyState('C') & 0x8000) {
             if (g_isToggled == false) {
                 zoomVal = 10; // max zoom
-                WriteProcessMemory(process_handle, (BYTE*)__optifineZoomPtr, &zoomVal, sizeof(zoomVal), nullptr);
+                WriteProcessMemory(process_handle, (unsigned int*)__optifineZoomPtr, &zoomVal, sizeof(zoomVal), nullptr);
                 g_isToggled = true;
                 Sleep(100);
             }
@@ -40,7 +40,7 @@ void init() {
             // write defaults
             if (g_isToggled == true) {
                 zoomVal = 60;
-                WriteProcessMemory(process_handle, (BYTE*)__optifineZoomPtr, &zoomVal, sizeof(zoomVal), nullptr);
+                WriteProcessMemory(process_handle, (unsigned int*)__optifineZoomPtr, &zoomVal, sizeof(zoomVal), nullptr);
                 g_isToggled = false;
                 Sleep(100);
             }
