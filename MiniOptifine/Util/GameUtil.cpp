@@ -13,7 +13,7 @@ uintptr_t GameUtil::findAddressFromPointer(HANDLE proc, uintptr_t provided_ptr, 
     return address;
 }
 
-uint32_t GameUtil::getGameProcessId(const wchar_t* proc_name)
+uint32_t GameUtil::getGameProcessId()
 {
     uint32_t processID = 0;
     HANDLE snapshotHandle = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
@@ -23,7 +23,7 @@ uint32_t GameUtil::getGameProcessId(const wchar_t* proc_name)
         processEntry.dwSize = sizeof(processEntry);
         if (Process32First(snapshotHandle, &processEntry)) {
             do {
-                if (!_wcsicmp(processEntry.szExeFile, proc_name)) {
+                if (!_wcsicmp(processEntry.szExeFile, (const wchar_t*)L"Minecraft.Windows.exe")) {
                     processID = processEntry.th32ProcessID;
 
                     break;

@@ -4,7 +4,7 @@ bool g_isToggled = false;
 
 void init() {
     GameUtil* l;
-    uint32_t process_id = l->getGameProcessId(L"Minecraft.Windows.exe");
+    uint32_t process_id = l->getGameProcessId();
     uintptr_t gameId = l->getGameModule(process_id);
     HANDLE process_handle = OpenProcess(PROCESS_ALL_ACCESS, NULL, process_id);
     std::cout << "Checking if game window is present..." << std::endl;
