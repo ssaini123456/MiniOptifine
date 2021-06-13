@@ -24,7 +24,7 @@ void init() {
     // k, begin writing to the ptr
     uintptr_t optifineZoombaseAddress = gameId + 0x03F58580;
     uintptr_t __optifineZoomPtr = l->findAddressFromPointer(process_handle, optifineZoombaseAddress, { 0x28, 0xFC8, 0x8, 0xC8, 0x170, 0x128, 0x18 });
-    float zoomVal = 60;
+    float zoomVal;
 
     while (true) {
         if (GetAsyncKeyState('C') & 0x8000) {
@@ -34,8 +34,8 @@ void init() {
                 g_isToggled = true;
                 Sleep(100);
             }
-           
         }
+
         if(GetAsyncKeyState('C') & 0x8000) {
             // write defaults
             if (g_isToggled == true) {
@@ -51,6 +51,5 @@ void init() {
 }
 
 int main() {
-    std::thread hackThread(init);
-    hackThread.join();
+    init();
 }
