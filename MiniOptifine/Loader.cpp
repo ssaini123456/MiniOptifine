@@ -7,12 +7,18 @@ void init() {
     DWORD process_id = l->getGameProcessId(L"Minecraft.Windows.exe");
     uintptr_t gameId = l->getGameModule(process_id);
     HANDLE process_handle = OpenProcess(PROCESS_ALL_ACCESS, NULL, process_id);
+    std::cout << "Checking if game window is present..." << std::endl;
 
     // check if the minecraft window is even open
     HWND gameWindow = FindWindow(NULL, L"Minecraft");
     if (!gameWindow) {
-        std::cout << "Please open minceraft before you execute this.";
+        system("color 4");
+        std::cout << "!!!! Game window not found. Please open minceraft and try again.";
         return;
+    }
+    else {
+        system("color b");
+        std::cout << "[~] Game window found! To toggle optifine zoom press C." << std::endl;
     }
 
     // k, begin writing to the ptr
