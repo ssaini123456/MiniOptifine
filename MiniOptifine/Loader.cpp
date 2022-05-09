@@ -20,8 +20,8 @@ void init() {
     uint32_t process_id = l->getGameProcessId();
     uintptr_t gameId = l->getGameModule(process_id);
     HANDLE process_handle = OpenProcess(PROCESS_ALL_ACCESS, NULL, process_id);
-    uintptr_t optifineZoombaseAddress = gameId + 0x040858C8;
-    uintptr_t __optifineZoomPtr = l->findAddressFromPointer(process_handle, optifineZoombaseAddress, { 0x28, 0xCC0, 0x08, 0x50, 0x50, 0x128, 0x18 });
+    uintptr_t optifineZoombaseAddress = gameId + 0x053DC110;
+    uintptr_t __optifineZoomPtr = l->findAddressFromPointer(process_handle, optifineZoombaseAddress, { 0x10, 0x18, 0x58, 0x8, 0x10, 0x180, 0x18 });
 
 
     std::cout << bootLogo << "\n";
